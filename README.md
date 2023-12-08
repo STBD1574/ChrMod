@@ -1,2 +1,2 @@
 # ChrMod
-chrmod public repository.
+ChrMod - A Minecraft: Netease Edition utility mod.
