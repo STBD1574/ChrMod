@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import _gui # type: ignore
-
-from ...text.chat_color import ColorCode
 from ..command import Command
-from ..manager import CommandManager
-from ..parameter import CommandParameter
-from ..parameter_type import ParameterType
-
 from ..argument import CommandArgument
+from ..registry import CommandRegistry
+from ..parameter import CommandParameter
+from ..parameter_type import ParameterType, ParameterTypes
+from ...game.game_info import ModGameInfo
+from ...text.chat_color import ColorCode
 
 class HelpCommand(Command):
     def __init__(self):
@@ -22,14 +21,18 @@ class HelpCommand(Command):
             self.print_help()
             return
         
-        args.get_argument(1, ParameterType.STRING)
+        command = CommandRegistry().get_command_by_name(args.get_argument(1, ParameterTypes.STRING))
+        if command is None:
+            ModGameInfo().display_client_message(ColorCode.RED + "Command not found: " + args.get_argument(1, ParameterTypes.STRING))
+
+        self.print_command(command)
         
     @staticmethod
     def print_help():
-        _gui.set_left_corner_notify_msg("Available commands:")
+        ModGameInfo().display_client_message("Available commands:")
 
-        for command in CommandManager().get_commands():
-            _gui.set_left_corner_notify_msg(ColorCode.GRAY + command.name + " - " + command.description)
+        for command in CommandRegistry().get_commands():
+            ModGameInfo().display_client_message(ColorCode.GRAY + command.name + " - " + command.description)
 
     @staticmethod
     def print_parameter(command, parameter, parent_parameter):
@@ -40,7 +43,7 @@ class HelpCommand(Command):
             for sub_parameter in parameter.sub_parameters:
                 HelpCommand.print_parameter(sub_parameter, command, parent_parameter)
         else:
-            _gui.set_left_corner_notify_msg(ColorCode.GRAY + command.name + " "  + " ".join(parent_parameter))
+            ModGameInfo().display_client_message(ColorCode.GRAY + command.name + " "  + " ".join(parent_parameter))
 
     @staticmethod
     def print_command(command):

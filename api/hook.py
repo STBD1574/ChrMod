@@ -3,7 +3,7 @@
 import functools
 import inspect
 
-class Hook:
+class Hook(object):
     def __init__(self):
         self.function_hooks = { }
 

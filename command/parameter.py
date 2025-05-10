@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from .parameter_type import ParameterType, parameter_types
+from .parameter_type import ParameterType, ParameterTypes
 
-class CommandParameter:
+class CommandParameter(object):
     def __init__(self, name, description, required, type, sub_parameters):
         # type: (str, str, bool, ParameterType, list[CommandParameter]) -> None
-        if self.type not in parameter_types:
+        if self.type not in ParameterTypes.__dict__.values():
             raise ValueError("Invalid parameter type: " + str(self.type))
 
         self._name = name                     # type: str

@@ -2,19 +2,16 @@
 
 from .command import Command
 
-from typing import Dict # typing
+class CommandRegistry(object):
+    _instance = None
 
-_instance = None
-
-class CommandRegistry:
     def __new__(cls):
-        global _instance
-        if _instance is None:
-            _instance = super().__new__(cls)
-        return _instance
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
 
     def __init__(self):
-        self._commands = { } # type: Dict[str, Command]
+        self._commands = { } # type: dict[str, Command]
 
     def register(self, command):
         # type: (Command) -> None
@@ -27,10 +24,16 @@ class CommandRegistry:
         self._commands[command.name] = command
 
     def get_commands(self):
-        # type: () -> Dict[str, Command]
+        # type: () -> dict[str, Command]
         """
         Get all registered commands.
         """
         return self._commands.itervalues()
     
+    def get_command_by_name(self, name):
+        # type: (str) -> Command | None
+        """
+        Get a command by name.
+        """
+        return self._commands.get(name)
     
