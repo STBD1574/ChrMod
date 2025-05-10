@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .command.manager import CommandManager
+from .command.registry import CommandRegistry
 
-class ChrMod(object):
-    def __init__(self):
-        self.command_manager = CommandManager()
+def main():
+    command_registry = CommandRegistry()

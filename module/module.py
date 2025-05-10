@@ -13,10 +13,12 @@ class Module:
 
     @property
     def enabled(self):
+        # type: () -> bool
         return self._enabled
 
     @enabled.setter
     def enabled(self, value):
+        # type: (bool) -> None
         if not isinstance(value, bool):
             raise TypeError("enabled must be a boolean")
         
@@ -25,12 +27,12 @@ class Module:
         else:
             self.on_disable()
 
-            
-
     @abstractmethod
     def on_enable(self):
+        # type: () -> None
         pass
 
     @abstractmethod
     def on_disable(self):
+        # type: () -> None
         pass

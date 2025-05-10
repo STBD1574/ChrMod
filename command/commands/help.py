@@ -6,7 +6,6 @@ from ..argument import CommandArgument
 from ..registry import CommandRegistry
 from ..parameter import CommandParameter
 from ..parameter_type import ParameterType, ParameterTypes
-from ...game.game_info import ModGameInfo
 from ...text.chat_color import ColorCode
 
 class HelpCommand(Command):
@@ -29,6 +28,7 @@ class HelpCommand(Command):
         
     @staticmethod
     def print_help():
+        # type: () -> None
         ModGameInfo().display_client_message("Available commands:")
 
         for command in CommandRegistry().get_commands():
