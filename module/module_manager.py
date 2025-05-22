@@ -3,6 +3,16 @@
 from .module import Module
 
 class ModuleManager(object):
+    _instance = None
+
+    def __new__(cls):
+        """ 
+        Sigleton class. 
+        """
+        if not cls._instance:
+            cls._instance = super(ModuleManager, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
         self._modules = { } # type: dict[str, Module]
 
@@ -10,5 +20,5 @@ class ModuleManager(object):
         # type: (Module) -> None
         self._modules[module.name] = module
 
-    def init(self):
-        pass
+def init():
+    pass

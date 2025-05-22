@@ -1,18 +1,22 @@
 # -*- coding: utf-8 -*-
 
 '''
-ChrModMod
+ChrMod
 author: Eison
 version: 1.0.0
 '''
 
-from . import loader_vanilla
-from . import loader_mod
+from . import chrmod
+import mod_log
 import sys
 import imp # type: ignore
 
-if "mod" not in sys.modules:
-    # 这里我们知道，如果vanilla.mcp已经被加载，init里就会加载mod
-    loader_vanilla.load_with_vanilla()
+def is_vanilla_loaded():
+    # type: () -> bool
+    return "mod.client.extraClientApi" in sys.modules
+
+if is_vanilla_loaded():
+    mod_log.logger.info("[MCP Mod Loader] -> chrmod.main()")
+    chrmod.main()
 else:
-    loader_mod.load_with_mod()
+    pass

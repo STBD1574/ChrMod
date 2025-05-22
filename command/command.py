@@ -2,9 +2,11 @@
 
 from abc import ABCMeta, abstractmethod
 
-from .parameter import CommandParameter # typing
+from .parameter import CommandParameter
 
-class Command(object, metaclass=ABCMeta):
+class Command(object):
+    __metaclass__ = ABCMeta
+
     def __init__(self, name, description, aliases):
         self._name = name               # type: str
         self._description = description # type: str

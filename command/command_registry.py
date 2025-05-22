@@ -6,8 +6,11 @@ class CommandRegistry(object):
     _instance = None
 
     def __new__(cls):
+        """
+        Singleton class.
+        """
         if cls._instance is None:
-            cls._instance = super().__new__(cls)
+            cls._instance = super(CommandRegistry, cls).__new__(cls)
         return cls._instance
 
     def __init__(self):
@@ -37,3 +40,10 @@ class CommandRegistry(object):
         """
         return self._commands.get(name)
     
+def init():
+    from .commands.help import HelpCommand
+    from .commands.scripts import ScriptsCommand
+
+    registry = CommandRegistry()
+    registry.register(HelpCommand())
+    registry.register(ScriptsCommand())

@@ -10,7 +10,7 @@ class ModuleCategory(tuple):
         return self[1]
 
 class ModuleCategories(object):
-    COMBAT = ModuleCategory("Combat", "icon_combat.png")
-    MOVEMENT = ModuleCategory("Movement", "icon_movement.png")
-    VISUAL = ModuleCategory("Visual", "icon_visual.png")
-    MISC = ModuleCategory("Misc", "icon_misc.png")
+    COMBAT = ModuleCategory(("Combat", "icon_combat.png"))
+    MOVEMENT = ModuleCategory(("Movement", "icon_movement.png"))
+    VISUAL = ModuleCategory(("Visual", "icon_visual.png"))
+    MISC = ModuleCategory(("Misc", "icon_misc.png"))

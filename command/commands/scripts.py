@@ -3,7 +3,7 @@
 from ..command import Command
 from ..parameter import CommandParameter
 from ..parameter import ParameterTypes
-from ..argument import CommandArgument
+from ..command_argument import CommandArgument
 import _utility # type: ignore
 import fop      # type: ignore
 import sys
